@@ -1,0 +1,71 @@
+[08/11/2025, 07:43:59 am] [SYSTEM] [system] Initializing WebSocket server
+[08/11/2025, 07:43:59 am] [SYSTEM] [system] Starting all blockchain watchers
+[08/11/2025, 07:43:59 am] [SYSTEM] [system] ETH wallet mornitoring...
+[08/11/2025, 07:43:59 am] [SYSTEM] [system] BSC wallet mornitoring...
+[08/11/2025, 07:43:59 am] [SYSTEM] [system] SOL wallet mornitoring...
+[08/11/2025, 07:43:59 am] [SYSTEM] [system] TRX wallet mornitoring...
+[08/11/2025, 07:43:59 am] [SYSTEM] [system] Running Discord Bot
+[08/11/2025, 07:43:59 am] [SYSTEM] [system] Multi-chain Wallet Tracker server started on port 5000 | Data: {"port":"5000"}
+[08/11/2025, 07:43:59 am] [SYSTEM] [system] ==================================================
+[08/11/2025, 07:43:59 am] [SYSTEM] [system] 🚀 MULTI-CHAIN WALLET TRACKER STARTED
+[08/11/2025, 07:43:59 am] [SYSTEM] [system] ==================================================
+[08/11/2025, 07:44:01 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[08/11/2025, 07:44:01 am] [INFO] [websocket] New client connected: K4wKHjFovO1u93ToAAAB
+[08/11/2025, 07:44:01 am] [INFO] [discord] Connected to backend socket: K4wKHjFovO1u93ToAAAB
+[08/11/2025, 07:44:09 am] [SYSTEM] [system] Received SIGINT, shutting down gracefully
+[08/11/2025, 07:45:07 am] [SYSTEM] [system] Initializing WebSocket server
+[08/11/2025, 07:45:07 am] [SYSTEM] [system] Starting all blockchain watchers
+[08/11/2025, 07:45:07 am] [SYSTEM] [system] ETH wallet mornitoring...
+[08/11/2025, 07:45:07 am] [SYSTEM] [system] BSC wallet mornitoring...
+[08/11/2025, 07:45:07 am] [SYSTEM] [system] SOL wallet mornitoring...
+[08/11/2025, 07:45:07 am] [SYSTEM] [system] TRX wallet mornitoring...
+[08/11/2025, 07:45:07 am] [SYSTEM] [system] Running Discord Bot
+[08/11/2025, 07:45:07 am] [SYSTEM] [system] Multi-chain Wallet Tracker server started on port 5000 | Data: {"port":"5000"}
+[08/11/2025, 07:45:07 am] [SYSTEM] [system] ==================================================
+[08/11/2025, 07:45:07 am] [SYSTEM] [system] 🚀 MULTI-CHAIN WALLET TRACKER STARTED
+[08/11/2025, 07:45:07 am] [SYSTEM] [system] ==================================================
+[08/11/2025, 07:45:09 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[08/11/2025, 07:45:09 am] [INFO] [websocket] New client connected: QXZe_EdO9IIR95JUAAAB
+[08/11/2025, 07:45:09 am] [INFO] [discord] Connected to backend socket: QXZe_EdO9IIR95JUAAAB
+[08/11/2025, 07:45:12 am] [TRANSACTION] [solana] CONFIRMED -> 0.5 ETH (Sepolia) Block 1762467620 | Data: {"block":1762467620,"hash":"4B341PwGACrznXejKuF9s6fXSqmyPKiSmrCiRbwW3XRjzT1pjSqrVSofciGEUVjo8CMG852U9F1fZnsKEq2fpiVS","from":"B1jKDhreHDeYLToFsm6oYbEgjrtT1yo1LUBQVy8q9jYA","to":"5SPrhG8mHbjfpVoBpYYH318aVbAsgi8uPitM2bwHxs7g","value":0.5}
+[08/11/2025, 07:45:12 am] [INFO] [websocket] Transaction broadcasted to WebSocket clients | Data: {"chain":"solana","hash":"4B341PwGACrznXejKuF9s6fXSqmyPKiSmrCiRbwW3XRjzT1pjSqrVSofciGEUVjo8CMG852U9F1fZnsKEq2fpiVS","status":"confirmed"}
+[08/11/2025, 07:45:14 am] [INFO]  solana: {"usd":162.37}
+[08/11/2025, 07:45:14 am] [DISCORD] [discord] Alert sent for solana transaction: 4B341PwGACrznXejKuF9s6fXSqmyPKiSmrCiRbwW3XRjzT1pjSqrVSofciGEUVjo8CMG852U9F1fZnsKEq2fpiVS | Data: {"chain":"solana","hash":"4B341PwGACrznXejKuF9s6fXSqmyPKiSmrCiRbwW3XRjzT1pjSqrVSofciGEUVjo8CMG852U9F1fZnsKEq2fpiVS","amount":0.5}
+[08/11/2025, 07:45:25 am] [INFO]  bitcoin: {"usd":102991}
+[08/11/2025, 07:45:43 am] [INFO]  ethereum: {"usd":3445.51}
+[08/11/2025, 07:45:45 am] [SYSTEM] [system] Received SIGINT, shutting down gracefully
+[08/11/2025, 07:46:12 am] [SYSTEM] [system] Initializing WebSocket server
+[08/11/2025, 07:46:12 am] [SYSTEM] [system] Starting all blockchain watchers
+[08/11/2025, 07:46:12 am] [SYSTEM] [system] ETH wallet mornitoring...
+[08/11/2025, 07:46:12 am] [SYSTEM] [system] BSC wallet mornitoring...
+[08/11/2025, 07:46:12 am] [SYSTEM] [system] SOL wallet mornitoring...
+[08/11/2025, 07:46:12 am] [SYSTEM] [system] TRX wallet mornitoring...
+[08/11/2025, 07:46:12 am] [SYSTEM] [system] Running Discord Bot
+[08/11/2025, 07:46:13 am] [SYSTEM] [system] Multi-chain Wallet Tracker server started on port 5000 | Data: {"port":"5000"}
+[08/11/2025, 07:46:13 am] [SYSTEM] [system] ==================================================
+[08/11/2025, 07:46:13 am] [SYSTEM] [system] 🚀 MULTI-CHAIN WALLET TRACKER STARTED
+[08/11/2025, 07:46:13 am] [SYSTEM] [system] ==================================================
+[08/11/2025, 07:46:15 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[08/11/2025, 07:46:15 am] [INFO] [websocket] New client connected: IZxQOq1aC2xNv216AAAB
+[08/11/2025, 07:46:15 am] [INFO] [discord] Connected to backend socket: IZxQOq1aC2xNv216AAAB
+[08/11/2025, 07:46:21 am] [SYSTEM] [system] Received SIGINT, shutting down gracefully
+[08/11/2025, 07:47:02 am] [SYSTEM] [system] Initializing WebSocket server
+[08/11/2025, 07:47:02 am] [SYSTEM] [system] Starting all blockchain watchers
+[08/11/2025, 07:47:02 am] [SYSTEM] [system] ETH wallet mornitoring...
+[08/11/2025, 07:47:02 am] [SYSTEM] [system] BSC wallet mornitoring...
+[08/11/2025, 07:47:02 am] [SYSTEM] [system] SOL wallet mornitoring...
+[08/11/2025, 07:47:02 am] [SYSTEM] [system] TRX wallet mornitoring...
+[08/11/2025, 07:47:02 am] [SYSTEM] [system] Running Discord Bot
+[08/11/2025, 07:47:03 am] [SYSTEM] [system] Multi-chain Wallet Tracker server started on port 5000 | Data: {"port":"5000"}
+[08/11/2025, 07:47:03 am] [SYSTEM] [system] ==================================================
+[08/11/2025, 07:47:03 am] [SYSTEM] [system] 🚀 MULTI-CHAIN WALLET TRACKER STARTED
+[08/11/2025, 07:47:03 am] [SYSTEM] [system] ==================================================
+[08/11/2025, 07:47:04 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[08/11/2025, 07:47:04 am] [INFO] [websocket] New client connected: RN4zKGjkuI4-9rZ3AAAB
+[08/11/2025, 07:47:04 am] [INFO] [discord] Connected to backend socket: RN4zKGjkuI4-9rZ3AAAB
+[08/11/2025, 07:47:21 am] [INFO]  bitcoin: {"usd":103042}
+[08/11/2025, 07:47:39 am] [INFO]  ethereum: {"usd":3447.08}
+[08/11/2025, 07:47:57 am] [INFO]  litecoin: {"usd":102.33}
+[08/11/2025, 07:48:15 am] [INFO]  solana: {"usd":162.44}
+[08/11/2025, 07:48:33 am] [INFO]  binance: {"usd":1003.38}
+[08/11/2025, 07:48:47 am] [SYSTEM] [system] Received SIGINT, shutting down gracefully
