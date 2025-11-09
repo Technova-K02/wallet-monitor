@@ -137,7 +137,7 @@ const processPendingTransaction = async (chain, token, tx) => {
   }
 };
 
-const processConfirmedTransaction = async (chain, token, tx, blockNumber) => {
+const processConfirmedTransaction = async (chain, token, tx, blockNumber, address = '') => {
   // logger.info(`${JSON.stringify(tx)}`);
   try {
     let value, from, to, hash;
@@ -169,10 +169,12 @@ const processConfirmedTransaction = async (chain, token, tx, blockNumber) => {
         }
       case 'SOL':
         {
+          const idx = tx.transaction.message.accountKeys.indexOf(address);
           from = tx.transaction.message.accountKeys[0];
-          to = tx.transaction.message.accountKeys[1];
-          let val = tx.meta.postBalances[1] - tx.meta.preBalances[1];
+          to = tx.transaction.message.accountKeys[idx];
+          let val = tx.meta.postBalances[idx] - tx.meta.preBalances[idx];
           value = val / 1000000000;
+          if(value <= 0) return;
           hash = tx.transaction.signatures[0];
           break;
         }
@@ -233,27 +235,27 @@ async function pollEthLike(chain) {
       console.log("RPC failed, retrying...2", e.message);
       await new Promise(r => setTimeout(r, 2000));
     }
-  }, 1000);
+  }, 2000);
 
-  // // pending
-  // setInterval(async () => {
-  //   try {
-  //     const token = await getTokenFromChain(chain);
-  //     const block = await rpc(url, "eth_getBlockByNumber", ["pending", true]);
-  //     for (const tx of block?.transactions || []) {
-  //       const to = await tx.to?.toLowerCase();
-  //       if (to && wl.includes(to) && !pending.has(tx.hash)) {
-  //         logger.info(`${JSON.stringify(tx)}`);
-  //         pending.add(tx.hash);
-  //         await processPendingTransaction(chain, token, tx);
-  //         console.log(`[${chain.toUpperCase()}] PENDING:`, tx.hash);
-  //       }
-  //     }
-  //   } catch (e) {
-  //     console.log("RPC failed, retrying...1", e.message);
-  //     await new Promise(r => setTimeout(r, 2000));
-  //   }
-  // }, 1000);
+  // pending
+  setInterval(async () => {
+    try {
+      const token = await getTokenFromChain(chain);
+      const block = await rpc(url, "eth_getBlockByNumber", ["pending", true]);
+      for (const tx of block?.transactions || []) {
+        const to = await tx.to?.toLowerCase();
+        if (to && wl.includes(to) && !pending.has(tx.hash)) {
+          logger.info(`${JSON.stringify(tx)}`);
+          pending.add(tx.hash);
+          await processPendingTransaction(chain, token, tx);
+          console.log(`[${chain.toUpperCase()}] PENDING:`, tx.hash);
+        }
+      }
+    } catch (e) {
+      console.log("RPC failed, retrying...1", e.message);
+      await new Promise(r => setTimeout(r, 2000));
+    }
+  }, 2000);
 }
 
 // ---------- SOLANA ----------
@@ -269,14 +271,14 @@ async function pollSol(chain) {
             jsonrpc: "2.0",
             id: 1,
             method: "getSignaturesForAddress",
-            params: [addr, { limit: 1 }]
+            params: [addr, { limit: 3 }]
           })
         });
         const data = await res.json();
         for (const tx of data.result || []) {
           if (!lastSeen.has(tx.signature)) {
             lastSeen.add(tx.signature);
-            if (lastSeen.size === 1) continue;
+            // if (lastSeen.size === 1) continue;
             const response = await fetch(RPC[chain], {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -289,7 +291,8 @@ async function pollSol(chain) {
             });
             let transaction = await response.json();
             transaction = await transaction.result;
-            await processConfirmedTransaction(chain, "SOL", transaction, transaction.blockTime);
+            // logger.info(`${JSON.stringify(transaction)}`);
+            await processConfirmedTransaction(chain, "SOL", transaction, 1, addr);
             console.log(`[SOL] CONFIRMED: ${tx.signature} for ${addr}`);
           }
         }
@@ -299,7 +302,7 @@ async function pollSol(chain) {
         await new Promise(r => setTimeout(r, 2000));
       }
     }
-  }, 3000);
+  }, 5000);
 }
 
 // ---------- TRON ----------
@@ -328,41 +331,41 @@ async function pollTron(chain) {
 }
 
 // ---------- BTC / LTC ----------
-async function pollBitcoinLike(chain, auth) {
-  const url = RPC[chain];
-  const wl = watch[chain];
-  const seenPending = new Set();
-  let lastBlock = null;
+// async function pollBitcoinLike(chain, auth) {
+//   const url = RPC[chain];
+//   const wl = watch[chain];
+//   const seenPending = new Set();
+//   let lastBlock = null;
 
-  // pending
-  setInterval(async () => {
-    const mempool = await rpc(url, "getrawmempool", [], auth);
-    for (const h of mempool || []) {
-      if (seenPending.has(h)) continue;
-      const tx = await rpc(url, "getrawtransaction", [h, true], auth);
-      const data = JSON.stringify(tx);
-      if (wl.some(a => data.includes(a))) {
-        console.log(`[${chain.toUpperCase()}] PENDING:`, h);
-        seenPending.add(h);
-      }
-    }
-  }, 5000);
+//   // pending
+//   setInterval(async () => {
+//     const mempool = await rpc(url, "getrawmempool", [], auth);
+//     for (const h of mempool || []) {
+//       if (seenPending.has(h)) continue;
+//       const tx = await rpc(url, "getrawtransaction", [h, true], auth);
+//       const data = JSON.stringify(tx);
+//       if (wl.some(a => data.includes(a))) {
+//         console.log(`[${chain.toUpperCase()}] PENDING:`, h);
+//         seenPending.add(h);
+//       }
+//     }
+//   }, 5000);
 
   // confirmed
-  setInterval(async () => {
-    const bh = await rpc(url, "getbestblockhash", [], auth);
-    if (bh === lastBlock) return;
-    lastBlock = bh;
-    const block = await rpc(url, "getblock", [bh, 2], auth);
-    for (const tx of block.tx) {
-      const data = JSON.stringify(tx);
-      if (wl.some(a => data.includes(a))) {
-        console.log(`[${chain.toUpperCase()}] CONFIRMED:`, tx.txid);
-        seenPending.delete(tx.txid);
-      }
-    }
-  }, 8000);
-}
+//   setInterval(async () => {
+//     const bh = await rpc(url, "getbestblockhash", [], auth);
+//     if (bh === lastBlock) return;
+//     lastBlock = bh;
+//     const block = await rpc(url, "getblock", [bh, 2], auth);
+//     for (const tx of block.tx) {
+//       const data = JSON.stringify(tx);
+//       if (wl.some(a => data.includes(a))) {
+//         console.log(`[${chain.toUpperCase()}] CONFIRMED:`, tx.txid);
+//         seenPending.delete(tx.txid);
+//       }
+//     }
+//   }, 8000);
+// }
 
 // ========== Start All ==========
 export const startWalletWatcher = () => {

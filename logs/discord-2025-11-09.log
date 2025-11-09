@@ -1,0 +1,54 @@
+[10/11/2025, 02:13:30 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:13:30 am] [INFO] [discord] Connected to backend socket: EEi6a8huX9aQhQFJAAAB
+[10/11/2025, 02:14:37 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:14:37 am] [INFO] [discord] Connected to backend socket: SXKGFuh64DHCPslfAAAB
+[10/11/2025, 02:15:42 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:15:42 am] [INFO] [discord] Connected to backend socket: QVGtsyKwD1bn8sHMAAAB
+[10/11/2025, 02:16:20 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:16:20 am] [INFO] [discord] Connected to backend socket: uywMSCb3R6697lNQAAAB
+[10/11/2025, 02:16:25 am] [DISCORD] [discord] Alert sent for solana transaction: 2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ | Data: {"chain":"solana","hash":"2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ","amount":1e-9}
+[10/11/2025, 02:22:05 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:22:05 am] [INFO] [discord] Connected to backend socket: 8bDKcFoVbKOPuzA6AAAB
+[10/11/2025, 02:22:11 am] [DISCORD] [discord] Alert sent for solana transaction: 2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ | Data: {"chain":"solana","hash":"2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ","amount":1e-9}
+[10/11/2025, 02:22:46 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:22:46 am] [INFO] [discord] Connected to backend socket: vkHOgmVyvvo7cKSSAAAB
+[10/11/2025, 02:22:51 am] [DISCORD] [discord] Alert sent for solana transaction: 2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ | Data: {"chain":"solana","hash":"2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ","amount":1e-9}
+[10/11/2025, 02:22:52 am] [DISCORD] [discord] Alert sent for solana transaction: 3kVGZgsXxBTNd1oqRysvq4Wxrh6161SzM3cf1oWyFqM7C3FuShqodjF6dAd9CS9Lru28vyZCNZCYSVHVRT8YUP9P | Data: {"chain":"solana","hash":"3kVGZgsXxBTNd1oqRysvq4Wxrh6161SzM3cf1oWyFqM7C3FuShqodjF6dAd9CS9Lru28vyZCNZCYSVHVRT8YUP9P","amount":-0.006175144}
+[10/11/2025, 02:24:04 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:24:04 am] [INFO] [discord] Connected to backend socket: wF08aaMA8zL48UfZAAAB
+[10/11/2025, 02:24:09 am] [DISCORD] [discord] Alert sent for solana transaction: 2dCsox6tFqy7zNZ4SVkivNQkZTm22C1GExXdVKqHP3sxRqGMkYc8F1LWfRwGvpG8Doev4tH4jyKVxnHdsq8HfvFW | Data: {"chain":"solana","hash":"2dCsox6tFqy7zNZ4SVkivNQkZTm22C1GExXdVKqHP3sxRqGMkYc8F1LWfRwGvpG8Doev4tH4jyKVxnHdsq8HfvFW","amount":0.1}
+[10/11/2025, 02:24:10 am] [DISCORD] [discord] Alert sent for solana transaction: 4B341PwGACrznXejKuF9s6fXSqmyPKiSmrCiRbwW3XRjzT1pjSqrVSofciGEUVjo8CMG852U9F1fZnsKEq2fpiVS | Data: {"chain":"solana","hash":"4B341PwGACrznXejKuF9s6fXSqmyPKiSmrCiRbwW3XRjzT1pjSqrVSofciGEUVjo8CMG852U9F1fZnsKEq2fpiVS","amount":0.5}
+[10/11/2025, 02:24:10 am] [DISCORD] [discord] Alert sent for solana transaction: 2LWmq7XAQiB9Hz6h5sEByo1NG5h7ijMtDSxbxKCNfKEZXpdevCNxd1wLR3fQQgQ5tXYGdPnW5MpGF96UsbeWhVVH | Data: {"chain":"solana","hash":"2LWmq7XAQiB9Hz6h5sEByo1NG5h7ijMtDSxbxKCNfKEZXpdevCNxd1wLR3fQQgQ5tXYGdPnW5MpGF96UsbeWhVVH","amount":0.1}
+[10/11/2025, 02:24:10 am] [DISCORD] [discord] Alert sent for solana transaction: RR7fe7nGEDbLTK9zKjAMgMpbe8NmYyRe7hrx3pvGEwZqcpAt56MLGxDn8yeggPuqY4GfS1GrArUKdPViN7zCnuY | Data: {"chain":"solana","hash":"RR7fe7nGEDbLTK9zKjAMgMpbe8NmYyRe7hrx3pvGEwZqcpAt56MLGxDn8yeggPuqY4GfS1GrArUKdPViN7zCnuY","amount":0.5}
+[10/11/2025, 02:24:11 am] [DISCORD] [discord] Alert sent for solana transaction: 2pnSbmTXbWhT9hS3PRWvB7Ck6T2a72saC4ES8Vzfo9zYaSVBgDKXFsxqfvk1wArdR1ibYoBVgd5SY3rbh1w8x8B4 | Data: {"chain":"solana","hash":"2pnSbmTXbWhT9hS3PRWvB7Ck6T2a72saC4ES8Vzfo9zYaSVBgDKXFsxqfvk1wArdR1ibYoBVgd5SY3rbh1w8x8B4","amount":0.5}
+[10/11/2025, 02:24:11 am] [DISCORD] [discord] Alert sent for solana transaction: KRqJncPDJu3kjuWPBD4ZF333MWcRP8DvTAunvSt7HD1w9Ljf34S6nPJqLuNwcZa9fCNHdCv6iY71omJ6CwoDH17 | Data: {"chain":"solana","hash":"KRqJncPDJu3kjuWPBD4ZF333MWcRP8DvTAunvSt7HD1w9Ljf34S6nPJqLuNwcZa9fCNHdCv6iY71omJ6CwoDH17","amount":1}
+[10/11/2025, 02:30:40 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:30:41 am] [INFO] [discord] Connected to backend socket: SiL2jC-l7JB3jXisAAAB
+[10/11/2025, 02:30:47 am] [DISCORD] [discord] Alert sent for solana transaction: 2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ | Data: {"chain":"solana","hash":"2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ","amount":1e-9}
+[10/11/2025, 02:31:19 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:31:19 am] [INFO] [discord] Connected to backend socket: wlAE4lOPB2KMNEI6AAAB
+[10/11/2025, 02:31:23 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:31:23 am] [INFO] [discord] Connected to backend socket: zumePAtp8z6hPPQEAAAB
+[10/11/2025, 02:31:29 am] [DISCORD] [discord] Alert sent for solana transaction: 2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ | Data: {"chain":"solana","hash":"2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ","amount":1e-9}
+[10/11/2025, 02:31:44 am] [DISCORD] [discord] Alert sent for solana transaction: 66svCfSyFz5or1Ge16T33bkjEjj39BPomDHYg7BEoHsYJXWz838vid5RTMKWdXs8fEjukPco9EB2sU7RWMtGrgt8 | Data: {"chain":"solana","hash":"66svCfSyFz5or1Ge16T33bkjEjj39BPomDHYg7BEoHsYJXWz838vid5RTMKWdXs8fEjukPco9EB2sU7RWMtGrgt8","amount":0.774868434}
+[10/11/2025, 02:40:37 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:40:37 am] [INFO] [discord] Connected to backend socket: qYImR-BkfeF3di5WAAAB
+[10/11/2025, 02:40:44 am] [DISCORD] [discord] Alert sent for solana transaction: 2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ | Data: {"chain":"solana","hash":"2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ","amount":1e-9}
+[10/11/2025, 02:40:59 am] [DISCORD] [discord] Alert sent for solana transaction: 66svCfSyFz5or1Ge16T33bkjEjj39BPomDHYg7BEoHsYJXWz838vid5RTMKWdXs8fEjukPco9EB2sU7RWMtGrgt8 | Data: {"chain":"solana","hash":"66svCfSyFz5or1Ge16T33bkjEjj39BPomDHYg7BEoHsYJXWz838vid5RTMKWdXs8fEjukPco9EB2sU7RWMtGrgt8","amount":0.774868434}
+[10/11/2025, 02:42:00 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:42:00 am] [INFO] [discord] Connected to backend socket: dk7hb8NRZMGafiWVAAAB
+[10/11/2025, 02:42:21 am] [DISCORD] [discord] Alert sent for solana transaction: 2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ | Data: {"chain":"solana","hash":"2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ","amount":1e-9}
+[10/11/2025, 02:42:39 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:42:39 am] [INFO] [discord] Connected to backend socket: -q3EdXgzTUyLIxwZAAAB
+[10/11/2025, 02:43:42 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:43:42 am] [INFO] [discord] Connected to backend socket: blEmDLMh5GknDzPqAAAB
+[10/11/2025, 02:43:48 am] [DISCORD] [discord] Alert sent for solana transaction: 2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ | Data: {"chain":"solana","hash":"2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ","amount":1e-9}
+[10/11/2025, 02:43:53 am] [DISCORD] [discord] Alert sent for solana transaction: 66svCfSyFz5or1Ge16T33bkjEjj39BPomDHYg7BEoHsYJXWz838vid5RTMKWdXs8fEjukPco9EB2sU7RWMtGrgt8 | Data: {"chain":"solana","hash":"66svCfSyFz5or1Ge16T33bkjEjj39BPomDHYg7BEoHsYJXWz838vid5RTMKWdXs8fEjukPco9EB2sU7RWMtGrgt8","amount":0.774868434}
+[10/11/2025, 02:45:36 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:45:36 am] [INFO] [discord] Connected to backend socket: YhWNn7dZGGLMTey3AAAB
+[10/11/2025, 02:45:41 am] [DISCORD] [discord] Alert sent for solana transaction: 2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ | Data: {"chain":"solana","hash":"2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ","amount":1e-9}
+[10/11/2025, 02:46:07 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:46:07 am] [INFO] [discord] Connected to backend socket: tKuC19Pjm1PpRL4UAAAB
+[10/11/2025, 02:46:24 am] [SUCCESS] [discord] Discord bot ready as Notifier#6376
+[10/11/2025, 02:46:24 am] [INFO] [discord] Connected to backend socket: BaWwq73V_0f8JN0UAAAB
+[10/11/2025, 02:46:30 am] [DISCORD] [discord] Alert sent for solana transaction: 2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ | Data: {"chain":"solana","hash":"2wpBGUJq5Q9yRxPsxSAi56w3kPnUwmZMja5Es5yCHu26ounEhZ5Xa8MJfiDKsXnq1RLiCXwhJcaE1M7bnNeR1hmQ","amount":1e-9}
