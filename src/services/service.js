@@ -16,9 +16,9 @@ const RPC = {
 };
 
 const watch = {
-  ethereum: [process.env.WALLET_ETH_1, process.env.WALLET_ETH_2].map(a => a.toLowerCase()),
+  ethereum: [process.env.WALLET_ETH_1].map(a => a.toLowerCase()),
   binance: [process.env.WALLET_BSC_1, process.env.WALLET_BSC_2].map(a => a.toLowerCase()),
-  solana: [process.env.WALLET_SOL_1, process.env.WALLET_SOL_2],
+  solana: [process.env.WALLET_SOL_1],//, process.env.WALLET_SOL_2],
   tron: [process.env.WALLET_TRON_1, process.env.WALLET_TRON_2],
   bitcoin: [process.env.WALLET_BTC_1, process.env.WALLET_BTC_2],
   litecoin: [process.env.WALLET_LTC_1, process.env.WALLET_SOL_2]
@@ -174,7 +174,7 @@ const processConfirmedTransaction = async (chain, token, tx, blockNumber, addres
           to = tx.transaction.message.accountKeys[idx];
           let val = tx.meta.postBalances[idx] - tx.meta.preBalances[idx];
           value = val / 1000000000;
-          if(value <= 0) return;
+          if (value <= 0) return;
           hash = tx.transaction.signatures[0];
           break;
         }
@@ -271,14 +271,14 @@ async function pollSol(chain) {
             jsonrpc: "2.0",
             id: 1,
             method: "getSignaturesForAddress",
-            params: [addr, { limit: 3 }]
+            params: [addr, { limit: 1 }]
           })
         });
         const data = await res.json();
         for (const tx of data.result || []) {
           if (!lastSeen.has(tx.signature)) {
             lastSeen.add(tx.signature);
-            // if (lastSeen.size === 1) continue;
+            if (lastSeen.size === 1) continue;
             const response = await fetch(RPC[chain], {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -286,7 +286,10 @@ async function pollSol(chain) {
                 jsonrpc: "2.0",
                 id: 1,
                 method: "getTransaction",
-                params: [tx.signature, { encoding: "json" }]
+                params: [tx.signature, {
+                  encoding: "json", "commitment": "confirmed",
+                  "maxSupportedTransactionVersion": 0
+                }]
               })
             });
             let transaction = await response.json();
@@ -351,7 +354,7 @@ async function pollTron(chain) {
 //     }
 //   }, 5000);
 
-  // confirmed
+// confirmed
 //   setInterval(async () => {
 //     const bh = await rpc(url, "getbestblockhash", [], auth);
 //     if (bh === lastBlock) return;
