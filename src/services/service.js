@@ -11,7 +11,7 @@ const RPC = {
   ethereum: process.env.ETH_MAIN_RPC,
   binance: process.env.BSC_MAIN_RPC,
   solana: process.env.SOLANA_MAIN_RPC,
-  tron: process.env.TRON_TEST_RPC,
+  tron: process.env.TRON_MAIN_RPC,
   bitcoin: "https://api.blockcypher.com/v1/", // needs local full node
   litecoin: "https://api.blockcypher.com/v1/"  // needs local full node
 };
