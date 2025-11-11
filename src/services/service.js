@@ -2,6 +2,7 @@ import logger from "../utils/logger.js";
 import { ethers } from "ethers";
 import { broadcastTx } from "../websocket/socketManager.js";
 import dotenv from 'dotenv';
+import fetch from 'node-fetch';
 
 dotenv.config();
 
@@ -11,17 +12,19 @@ const RPC = {
   binance: process.env.BSC_MAIN_RPC,
   solana: process.env.SOLANA_MAIN_RPC,
   tron: process.env.TRON_TEST_RPC,
-  bitcoin: "http://user:pass@127.0.0.1:8332", // needs local full node
-  litecoin: "http://user:pass@127.0.0.1:9332"  // needs local full node
+  bitcoin: "https://api.blockcypher.com/v1/", // needs local full node
+  litecoin: "https://api.blockcypher.com/v1/"  // needs local full node
 };
+
+const cypher_token = process.env.BLOCK_CYPHER_TOKEN;
 
 const watch = {
   ethereum: [process.env.WALLET_ETH_1].map(a => a.toLowerCase()),
-  binance: [process.env.WALLET_BSC_1, process.env.WALLET_BSC_2].map(a => a.toLowerCase()),
-  solana: [process.env.WALLET_SOL_1],//, process.env.WALLET_SOL_2],
-  tron: [process.env.WALLET_TRON_1, process.env.WALLET_TRON_2],
-  bitcoin: [process.env.WALLET_BTC_1, process.env.WALLET_BTC_2],
-  litecoin: [process.env.WALLET_LTC_1, process.env.WALLET_SOL_2]
+  binance: [process.env.WALLET_BSC_1].map(a => a.toLowerCase()),
+  solana: [process.env.WALLET_SOL_1], //, process.env.WALLET_SOL_2],
+  tron: [process.env.WALLET_TRON_1],
+  bitcoin: [process.env.WALLET_BTC_1],
+  litecoin: [process.env.WALLET_LTC_1]
 };
 
 // =============== UTILITIES ===============
@@ -108,6 +111,24 @@ const processPendingTransaction = async (chain, token, tx) => {
           hash = tx.signature[0];
           break;
         }
+      case 'BTC':
+        {
+          if (tx.tx_output_n <= -1) return;
+          from = '';
+          to = watch[chain][0];
+          value = tx.value / le8;
+          hash = tx.tx_hash;
+          break;
+        }
+      case 'LTC':
+        {
+          if (tx.tx_output_n <= -1) return;
+          from = '';
+          to = watch[chain][0];
+          value = tx.value / le8;
+          hash = tx.tx_hash;
+          break;
+        }
       default:
         { value = 0; from = ''; to = ''; hash = ''; }
     }
@@ -176,6 +197,24 @@ const processConfirmedTransaction = async (chain, token, tx, blockNumber, addres
           value = val / 1000000000;
           if (value <= 0) return;
           hash = tx.transaction.signatures[0];
+          break;
+        }
+      case 'BTC':
+        {
+          if (tx.tx_output_n <= -1) return;
+          from = "";
+          to = watch[chain][0];
+          value = tx.value / 1e8;
+          hash = tx.tx_hash;
+          break;
+        }
+      case 'LTC':
+        {
+          if (tx.tx_output_n <= -1) return;
+          from = "";
+          to = watch[chain][0];
+          value = tx.value / 1e8;
+          hash = tx.tx_hash;
           break;
         }
       default:
@@ -302,10 +341,10 @@ async function pollSol(chain) {
         if (lastSeen.size > 1000) lastSeen = new Set([...lastSeen].slice(-500));
       } catch (e) {
         console.log("RPC failed, retrying...3", e.message);
-        await new Promise(r => setTimeout(r, 2000));
+        await new Promise(r => setTimeout(r, 5000));
       }
     }
-  }, 5000);
+  }, 20000);
 }
 
 // ---------- TRON ----------
@@ -334,52 +373,64 @@ async function pollTron(chain) {
 }
 
 // ---------- BTC / LTC ----------
-// async function pollBitcoinLike(chain, auth) {
-//   const url = RPC[chain];
-//   const wl = watch[chain];
-//   const seenPending = new Set();
-//   let lastBlock = null;
-
-//   // pending
-//   setInterval(async () => {
-//     const mempool = await rpc(url, "getrawmempool", [], auth);
-//     for (const h of mempool || []) {
-//       if (seenPending.has(h)) continue;
-//       const tx = await rpc(url, "getrawtransaction", [h, true], auth);
-//       const data = JSON.stringify(tx);
-//       if (wl.some(a => data.includes(a))) {
-//         console.log(`[${chain.toUpperCase()}] PENDING:`, h);
-//         seenPending.add(h);
-//       }
-//     }
-//   }, 5000);
-
-// confirmed
-//   setInterval(async () => {
-//     const bh = await rpc(url, "getbestblockhash", [], auth);
-//     if (bh === lastBlock) return;
-//     lastBlock = bh;
-//     const block = await rpc(url, "getblock", [bh, 2], auth);
-//     for (const tx of block.tx) {
-//       const data = JSON.stringify(tx);
-//       if (wl.some(a => data.includes(a))) {
-//         console.log(`[${chain.toUpperCase()}] CONFIRMED:`, tx.txid);
-//         seenPending.delete(tx.txid);
-//       }
-//     }
-//   }, 8000);
-// }
+async function pollBitcoinLike(chain) {
+  const wl = watch[chain][0];
+  const url = RPC[chain] + (chain === 'bitcoin' ? 'btc' : 'ltc') + '/main/addrs/' + wl + '?';
+  // const token = cypher_token;
+  const params = new URLSearchParams({
+    limit: '25',
+    includeConfidence: 'true',
+    token: cypher_token,
+  });
+  let seen = new Set();
+  setInterval(async () => {
+    try {
+      logger.info(`${url + params.toString()}`);
+      const response = await fetch(url + params.toString);
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`HTTP ${response.status} ${response.statusText} - ${text}`);
+      }
+      const data = await response.json();
+      // const confirmed = normalizeTxs(data.txrefs, 'confirmed');
+      for (const confirmedTxs of data.txrefs) {
+        if (!seen.has(confirmedTxs.tx_hash)) {
+          seen.add(confirmedTxs.tx_hash);
+          await processConfirmedTransaction(chain, getTokenFromChain(chain), confirmedTxs, 1);
+          console.log(`[${getTokenFromChain(chain)}] CONFIRMED: ${confirmedTxs.tx_hash} for ${wl}`);
+        }
+      }
+      // const pending = normalizeTxs(data.unconfirmed_txrefs, 'pending');
+      if (data.unconfirmed_txrefs) {
+        for (const pendingTxs of data.unconfirmed_txrefs) {
+          if (!seen.has(pendingTxs)) {
+            seen.add(pendingTxs.tx_hash);
+            await processPendingTransaction(chain, getTokenFromChain(chain), pendingTxs);
+            console.log(`[${getTokenFromChain(chain)}] PENDING: ${pendingTxs.tx_hash} for ${wl}`);
+          }
+        }
+      }
+      if (seen.size > 1000) seen = new Set([...seen].slice(-500));
+      logger.info(`${JSON.stringify(data.txrefs)}`);
+    } catch (e) {
+      console.log("Fetch failed, retrying", e.message);
+      await new Promise(r => setTimeout(r, 5000));
+    }
+  }, 5000);
+}
 
 // ========== Start All ==========
 export const startWalletWatcher = () => {
   pollEthLike("ethereum");
-  logger.system("ETH wallet mornitoring...");
+  logger.system("ETH wallet monitoring...");
   pollEthLike("binance");
-  logger.system("BSC wallet mornitoring...");
+  logger.system("BSC wallet monitoring...");
   pollSol("solana");
-  logger.system("SOL wallet mornitoring...");
+  logger.system("SOL wallet monitoring...");
   pollTron("tron");
-  logger.system("TRX wallet mornitoring...");
-  // pollBitcoinLike("btc", "user:password");
-  // pollBitcoinLike("ltc", "user:password");
+  logger.system("TRX wallet monitoring...");
+  pollBitcoinLike("bitcoin");
+  logger.system("BTC wallet monitoring...");
+  pollBitcoinLike("litecoin");
+  logger.system("LTC wallet monitoring...");
 }
