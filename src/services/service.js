@@ -344,7 +344,7 @@ async function pollSol(chain) {
         await new Promise(r => setTimeout(r, 5000));
       }
     }
-  }, 20000);
+  }, 5000);
 }
 
 // ---------- TRON ----------
@@ -414,9 +414,9 @@ async function pollBitcoinLike(chain) {
       logger.info(`${JSON.stringify(data.txrefs)}`);
     } catch (e) {
       console.log("Fetch failed, retrying", e.message);
-      await new Promise(r => setTimeout(r, 5000));
+      await new Promise(r => setTimeout(r, 10000));
     }
-  }, 5000);
+  }, chain==='bitcoin'?20000:13000);
 }
 
 // ========== Start All ==========
