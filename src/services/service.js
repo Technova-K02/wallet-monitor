@@ -2,7 +2,6 @@ import logger from "../utils/logger.js";
 import { ethers } from "ethers";
 import { broadcastTx } from "../websocket/socketManager.js";
 import dotenv from 'dotenv';
-import fetch from 'node-fetch';
 
 dotenv.config();
 
@@ -16,7 +15,8 @@ const RPC = {
   litecoin: "https://api.blockcypher.com/v1/"  // needs local full node
 };
 
-const cypher_token = process.env.BLOCK_CYPHER_TOKEN;
+const cypher_token = ['3517d8d5ed8f40eabf0770256c8f668f', 'd45d4af9aabd46ddadf65bedc7f09a29', 'b0936e201ef74a309af89c32d6bfa82c', '10b2adb9c0e94b6d9b63117bbfc807b0', 'baea0793428c47f8833ddc000283f42e', '22e2ddc9913e480f82c85b18d4011b34', '9f01817790f84bb8b86ee65aeb24cc36', '2e683b54aeeb45a8b5f62cc8c10fb3ac', '77a558492df44b6e8ccbd1169d7a8676', '6f31c3e2af244d3290e1ff71b6c9e16c'];
+let cypher_token_count = 0;
 
 const watch = {
   ethereum: [process.env.WALLET_ETH_1].map(a => a.toLowerCase()),
@@ -195,6 +195,7 @@ const processConfirmedTransaction = async (chain, token, tx, blockNumber, addres
           to = tx.transaction.message.accountKeys[idx];
           let val = tx.meta.postBalances[idx] - tx.meta.preBalances[idx];
           value = val / 1000000000;
+          logger.info(`${value}`);
           if (value <= 0) return;
           hash = tx.transaction.signatures[0];
           break;
@@ -274,7 +275,7 @@ async function pollEthLike(chain) {
       console.log("RPC failed, retrying...2", e.message);
       await new Promise(r => setTimeout(r, 2000));
     }
-  }, 2000);
+  }, 5000);
 
   // pending
   setInterval(async () => {
@@ -294,56 +295,61 @@ async function pollEthLike(chain) {
       console.log("RPC failed, retrying...1", e.message);
       await new Promise(r => setTimeout(r, 2000));
     }
-  }, 2000);
+  }, 5000);
 }
 
 // ---------- SOLANA ----------
 async function pollSol(chain) {
   let lastSeen = new Set();
+  const addr = watch[chain][0];
   setInterval(async () => {
-    for (const addr of watch[chain]) {
-      try {
-        const res = await fetch(RPC[chain], {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            jsonrpc: "2.0",
-            id: 1,
-            method: "getSignaturesForAddress",
-            params: [addr, { limit: 1 }]
-          })
-        });
-        const data = await res.json();
-        for (const tx of data.result || []) {
-          if (!lastSeen.has(tx.signature)) {
-            lastSeen.add(tx.signature);
-            if (lastSeen.size === 1) continue;
-            const response = await fetch(RPC[chain], {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                jsonrpc: "2.0",
-                id: 1,
-                method: "getTransaction",
-                params: [tx.signature, {
-                  encoding: "json", "commitment": "confirmed",
-                  "maxSupportedTransactionVersion": 0
-                }]
-              })
-            });
-            let transaction = await response.json();
-            transaction = await transaction.result;
-            // logger.info(`${JSON.stringify(transaction)}`);
-            await processConfirmedTransaction(chain, "SOL", transaction, 1, addr);
-            console.log(`[SOL] CONFIRMED: ${tx.signature} for ${addr}`);
-          }
+    // for (const addr of watch[chain]) {
+    try {
+      const res = await fetch(RPC[chain], {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          id: 1,
+          method: "getSignaturesForAddress",
+          params: [addr, { limit: 1 }]
+        })
+      });
+      const data = await res.json();
+      logger.info(`${JSON.stringify(data)}`);
+      for (const tx of data.result || []) {
+        logger.info(`${JSON.stringify(tx)}`);
+        if (!lastSeen.has(tx.signature)) {
+          lastSeen.add(tx.signature);
+
+          logger.info(`${JSON.stringify(tx)}`);
+          // if (lastSeen.size === 1) continue;
+          const response = await fetch(RPC[chain], {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              jsonrpc: "2.0",
+              id: 1,
+              method: "getTransaction",
+              params: [tx.signature, {
+                encoding: "json", "commitment": "confirmed",
+                "maxSupportedTransactionVersion": 0
+              }]
+            })
+          });
+          let transaction = await response.json();
+          transaction = await transaction.result;
+          // logger.info(`${JSON.stringify(transaction)}`);
+          await processConfirmedTransaction(chain, "SOL", transaction, 1, addr);
+          console.log(`[SOL] CONFIRMED: ${tx.signature} for ${addr}`);
         }
-        if (lastSeen.size > 1000) lastSeen = new Set([...lastSeen].slice(-500));
-      } catch (e) {
-        console.log("RPC failed, retrying...3", e.message);
-        await new Promise(r => setTimeout(r, 5000));
       }
+      if (lastSeen.size > 1000) lastSeen = new Set([...lastSeen].slice(-500));
+    } catch (e) {
+      console.log("RPC failed, retrying...3", e.message);
+      await new Promise(r => setTimeout(r, 2000));
     }
+    // }
   }, 5000);
 }
 
@@ -369,7 +375,7 @@ async function pollTron(chain) {
         await new Promise(r => setTimeout(r, 2000));
       }
     }
-  }, 3000);
+  }, 5000);
 }
 
 // ---------- BTC / LTC ----------
@@ -380,12 +386,12 @@ async function pollBitcoinLike(chain) {
   const params = new URLSearchParams({
     limit: '25',
     includeConfidence: 'true',
-    token: cypher_token,
   });
   let seen = new Set();
   setInterval(async () => {
     try {
-      logger.info(`${url + params.toString()}`);
+      params.set('token', cypher_token[cypher_token_count]);
+      // logger.info(`${url + params.toString()}`);
       const response = await fetch(url + params.toString);
       if (!response.ok) {
         const text = await response.text();
@@ -411,12 +417,13 @@ async function pollBitcoinLike(chain) {
         }
       }
       if (seen.size > 1000) seen = new Set([...seen].slice(-500));
-      logger.info(`${JSON.stringify(data.txrefs)}`);
+      // logger.info(`${JSON.stringify(data.txrefs)}`);
     } catch (e) {
       console.log("Fetch failed, retrying", e.message);
-      await new Promise(r => setTimeout(r, 10000));
+      cypher_token_count = (cypher_token_count + 1) % 10;
+      await new Promise(r => setTimeout(r, 5000));
     }
-  }, chain==='bitcoin'?20000:13000);
+  }, 150000);
 }
 
 // ========== Start All ==========
